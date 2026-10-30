@@ -1,0 +1,22 @@
+plugins {
+    id 'com.android.application'
+}
+def requestedAppId = project.findProperty("APP_ID") ?: "com.martins.webapp"
+def requestedOrientation = project.findProperty("APP_ORIENTATION") ?: "portrait"
+def manifestOrientation = requestedOrientation == "sensor" ? "fullSensor" : requestedOrientation
+android {
+    namespace 'com.martins.apkengine'
+    compileSdk 35
+    defaultConfig {
+        applicationId requestedAppId
+        minSdk 23
+        targetSdk 28
+        versionCode 1
+        versionName "1.0"
+        manifestPlaceholders = [appScreenOrientation: manifestOrientation]
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
